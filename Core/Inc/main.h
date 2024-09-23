@@ -31,7 +31,9 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+extern void func(float *array, uint32_t size);
 
+float PCSA_test(float *array,uint32_t);
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
