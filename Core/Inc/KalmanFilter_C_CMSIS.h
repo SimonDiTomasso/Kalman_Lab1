@@ -26,14 +26,14 @@
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
 typedef struct {
-	  float q;
-	  float r;
-	  float x;
-	  float p;
-	  float k;
+	  float32_t q;
+	  float32_t r;
+	  float32_t x;
+	  float32_t p;
+	  float32_t k;
 } KalmanFilter;
 
-float kalman_update(KalmanFilter *KalmanFilter, float32_t measurement);
+float kalman_update_C_CMSIS(KalmanFilter *KalmanFilter, float32_t measurement);
 
 /* USER CODE END ET */
 

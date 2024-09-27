@@ -47,7 +47,7 @@ typedef struct {
 	  float k;
 } KalmanFilter;
 
-float kalmanInit(KalmanFilter *KalmanFilter, float q, float r, float x, float p, float k);
+void kalmanInit(KalmanFilter *KalmanFilter, float q, float r, float x, float p, float k);
 float kalman_update(KalmanFilter *KalmanFilter, float measurement);
 
 /* USER CODE END ET */

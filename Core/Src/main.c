@@ -28,7 +28,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#define ARM_MATH_CM4
+//#define ARM_MATH_CM4
 #include "arm_math.h"
 #include <math.h>
 /* USER CODE END Includes */
@@ -149,7 +149,7 @@ int main(void){
 	KalmanFilter kf;
 
   /* USER CODE BEGIN 1 */
-	kalmanInit(&kf, 0.1, 0.1, 0.1, 5.0, 0.0);
+	kalmanInit(&kf, 0.1, 0.1, 5.0, 0.1, 0.0);
 
   /* USER CODE END 1 */
 
@@ -172,7 +172,7 @@ int main(void){
 
 
 	 for(int i = 0; i < 5; i++) {
-		  kalman_update(kf, meas[i]);
+		  kalman_update(&kf, meas[i]);
 	      }
 	 	 return 0;
 
