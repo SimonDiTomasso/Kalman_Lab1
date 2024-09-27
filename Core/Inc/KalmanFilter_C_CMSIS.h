@@ -19,7 +19,7 @@
 /* USER CODE BEGIN Includes */
 
 #include <stdio.h>  // Standard input/output library for printf
-
+#include "arm_math.h"
 
 /* USER CODE END Includes */
 
@@ -31,9 +31,9 @@ typedef struct {
 	  float32_t x;
 	  float32_t p;
 	  float32_t k;
-} KalmanFilter;
+} KalmanFilter_CMSIS;
 
-float kalman_update_C_CMSIS(KalmanFilter *KalmanFilter, float32_t measurement);
+float kalman_update_C_CMSIS(KalmanFilter_CMSIS *KalmanFilter, float32_t measurement);
 
 /* USER CODE END ET */
 

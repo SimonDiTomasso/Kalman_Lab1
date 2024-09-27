@@ -23,7 +23,8 @@ Core/Src/KalmanFilter_C_CMSIS.o: ../Core/Src/KalmanFilter_C_CMSIS.c \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ramfunc.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h \
- ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h \
+ ../Core/Inc/arm_math.h
 ../Core/Inc/arm_math.h:
 ../Drivers/CMSIS/Include/cmsis_compiler.h:
 ../Drivers/CMSIS/Include/cmsis_gcc.h:
@@ -51,3 +52,4 @@ Core/Src/KalmanFilter_C_CMSIS.o: ../Core/Src/KalmanFilter_C_CMSIS.c \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ramfunc.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_pwr_ex.h:
+../Core/Inc/arm_math.h:

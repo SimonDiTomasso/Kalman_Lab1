@@ -25,7 +25,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include "KalmanFilter_C_CMSIS.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 //#define ARM_MATH_CM4
@@ -141,16 +141,23 @@ void kalmanInit(KalmanFilter *KalmanFilter, float q, float r, float x, float p, 
 	  KalmanFilter->k = k;
 
 }
+void kalmanInit_CMSIS(KalmanFilter_CMSIS *KalmanFilter, float32_t q, float32_t r, float32_t x, float32_t p, float32_t k){
+	  KalmanFilter->q = q;
+	  KalmanFilter->r = r;
+	  KalmanFilter->x = x;
+	  KalmanFilter->p = p;
+	  KalmanFilter->k = k;
 
+}
 
 
 int main(void){
 	
 	KalmanFilter kf;
-
+	KalmanFilter_CMSIS kf_CMSIS;
   /* USER CODE BEGIN 1 */
 	kalmanInit(&kf, 0.1, 0.1, 5.0, 0.1, 0.0);
-
+	kalmanInit_CMSIS(&kf_CMSIS, 0.1f, 0.1f, 5.0f, 0.1f, 0.0f);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -173,11 +180,14 @@ int main(void){
 
 	 for(int i = 0; i < 5; i++) {
 		  kalman_update(&kf, meas[i]);
-	      }
-	 	 return 0;
+	 }
+	 return 0;
 
 
-
+	 	for(int i = 0; i < 5; i++) {
+	 		kalman_update_C_CMSIS(&kf_CMSIS, meas[i]);
+	 	}
+	 	return 0;
 
 
 

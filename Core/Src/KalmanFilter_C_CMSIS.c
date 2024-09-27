@@ -9,7 +9,7 @@
 #include "KalmanFilter_C_CMSIS.h"
 
 // Kalman filter update function
-float32_t kalman_update_C_CMSIS(KalmanFilter *filter, float32_t measurement) {
+float32_t kalman_update_C_CMSIS(KalmanFilter_CMSIS *filter, float32_t measurement) {
     // Temporary variables for CMSIS-DSP operations
     float32_t srcA[1], srcB[1], dst[1];
 
