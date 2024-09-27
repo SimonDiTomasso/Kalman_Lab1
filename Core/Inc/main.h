@@ -1,10 +1,10 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
+  ****************************************************************************
   * @file           : main.h
   * @brief          : Header for main.c file.
   *                   This file contains the common defines of the application.
-  ******************************************************************************
+  ****************************************************************************
   * @attention
   *
   * Copyright (c) 2024 STMicroelectronics.
@@ -14,7 +14,7 @@
   * in the root directory of this software component.
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
-  ******************************************************************************
+  ****************************************************************************
   */
 /* USER CODE END Header */
 
@@ -31,13 +31,24 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-extern void func(float *array, uint32_t size);
 
-float PCSA_test(float *array,uint32_t);
+#include <stdio.h>  // Standard input/output library for printf
+
+
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
+typedef struct {
+	  float q;
+	  float r;
+	  float x;
+	  float p;
+	  float k;
+} KalmanFilter;
+
+float kalmanInit(KalmanFilter *KalmanFilter, float q, float r, float x, float p, float k);
+float kalman_update(KalmanFilter *KalmanFilter, float measurement);
 
 /* USER CODE END ET */
 

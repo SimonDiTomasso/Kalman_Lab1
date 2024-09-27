@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
+  ****************************************************************************
   * @file           : main.c
   * @brief          : Main program body
-  ******************************************************************************
+  ****************************************************************************
   * @attention
   *
   * Copyright (c) 2024 STMicroelectronics.
@@ -13,23 +13,28 @@
   * in the root directory of this software component.
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
-  ******************************************************************************
+  ****************************************************************************
   */
+
+
+/* This main.c is used to call the other c functions to keep it this project cleaner, this used to calculate the time*/
+
+
+
+
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-//#define ARM_MATH_CM4 already defined in settings
+#define ARM_MATH_CM4
 #include "arm_math.h"
+#include <math.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-#include <math.h>
-//#include "arm_math.h"
-
 /* ----------------------------------------------------------------------
 * Defines each of the tests performed
 * ------------------------------------------------------------------- */
@@ -90,7 +95,14 @@ arm_status status;       /* Status of the example */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define ITM_Port32(n) (*((volatile unsigned long *) (0xE0000000+4*n)))
 
+
+float PCSA_test(float* a,uint32_t b){
+	uint32_t c;
+	c= a[0]+b;
+	return c;
+}
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -106,7 +118,6 @@ arm_status status;       /* Status of the example */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -120,10 +131,25 @@ static void MX_GPIO_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
-int main(void)
-{
+
+
+void kalmanInit(KalmanFilter *KalmanFilter, float q, float r, float x, float p, float k){
+	  KalmanFilter->q = q;
+	  KalmanFilter->r = r;
+	  KalmanFilter->x = x;
+	  KalmanFilter->p = p;
+	  KalmanFilter->k = k;
+
+}
+
+
+
+int main(void){
+	
+	KalmanFilter kf;
 
   /* USER CODE BEGIN 1 */
+	kalmanInit(&kf, 0.1, 0.1, 0.1, 5.0, 0.0);
 
   /* USER CODE END 1 */
 
@@ -133,6 +159,31 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+
+
+	  // call kalman assembly function
+	  // r0 = pointer to KalmanFilter struct
+	  //s0 = measurement (float)
+
+
+  	float meas[5] = {0.0, 1.0, 2.0, 3.0, 4.0};
+
+
+
+
+	 for(int i = 0; i < 5; i++) {
+		  kalman_update(kf, meas[i]);
+	      }
+	 	 return 0;
+
+
+
+
+
+
+
+
+
 
   /* USER CODE END Init */
 
@@ -144,9 +195,55 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
+//   uint32_t i;                      /* Loop counter */
+//   float32_t diff;          /* Difference between reference and test outputs */
 
+//   /* Multiplication of two input buffers */
+//   arm_mult_f32(srcA_buf_f32, srcB_buf_f32, multOutput, MAX_BLOCKSIZE);
+//
+//   /* Accumulate the multiplication output values to
+//      get the dot product of the two inputs */
+//  for(int i =0; i< MAX_BLOCKSIZE; i++)
+// {
+//           arm_add_f32(&testOutput, &multOutput[i], &testOutput, 1);
+// }
+//
+//  /* absolute value of difference between ref and test */
+//  ITM_Port32(31) = 1;
+//  //It is better for 1000 execution
+//  diff = fabsf(refDotProdOut - testOutput);
+//  ITM_Port32(31) = 2;
+//
+
+
+
+
+  /* Comparison of dot product value with reference */
+//         if(diff > DELTA)
+//         {
+//                 status = ARM_MATH_TEST_FAILURE;
+//         }
+//
+//         if( status == ARM_MATH_TEST_FAILURE)
+//         {
+//           while(1);
+//         }
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+
+//    float out1=0;
+//	float array[1] = {5};
+//			  out1=PCSA_test(&array,2);
+//
+//			  ITM_Port32(31) = 1;
+//
+//         func(&array, 8);
+//
+//   	  ITM_Port32(31) = 2;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -159,6 +256,7 @@ int main(void)
   }
   /* USER CODE END 3 */
 }
+
 
 /**
   * @brief System Clock Configuration
@@ -208,24 +306,6 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-}
-
-/**
-  * @brief GPIO Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_GPIO_Init(void)
-{
-/* USER CODE BEGIN MX_GPIO_Init_1 */
-/* USER CODE END MX_GPIO_Init_1 */
-
-  /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOA_CLK_ENABLE();
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-
-/* USER CODE BEGIN MX_GPIO_Init_2 */
-/* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
