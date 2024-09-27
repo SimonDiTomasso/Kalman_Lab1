@@ -276,7 +276,7 @@
  */
 
 
-#define _ARM_MATH_H
+#ifndef _ARM_MATH_H
 #define _ARM_MATH_H
 
 /* Compiler specific diagnostic adjustment */
@@ -284,7 +284,7 @@
 
 #elif defined ( __ARMCC_VERSION ) && ( __ARMCC_VERSION >= 6010050 )
 
-#if defined ( __GNUC__ )
+#elif defined ( __GNUC__ )
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wsign-conversion"
   #pragma GCC diagnostic ignored "-Wconversion"
