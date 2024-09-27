@@ -61,7 +61,7 @@ main-build: Kalman_Lab1_LeBon.elf secondary-outputs
 
 # Tool invocations
 Kalman_Lab1_LeBon.elf Kalman_Lab1_LeBon.map: $(OBJS) $(USER_OBJS) C:\Users\simto\STM32CubeIDE\workspace_1.16.0\Kalman_Lab1_LeBon\STM32L475VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Kalman_Lab1_LeBon.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\simto\STM32CubeIDE\workspace_1.16.0\Kalman_Lab1_LeBon\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Kalman_Lab1_LeBon.map" -Wl,--gc-sections -static -L"C:\Users\simto\STM32CubeIDE\workspace_1.16.0\Kalman_Lab1_LeBon\Core\lib" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "Kalman_Lab1_LeBon.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\simto\STM32CubeIDE\workspace_1.16.0\Kalman_Lab1_LeBon\STM32L475VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Kalman_Lab1_LeBon.map" -Wl,--gc-sections -static -L"C:\Users\simto\STM32CubeIDE\workspace_1.16.0\Kalman_Lab1_LeBon\Core\lib" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -177,15 +177,18 @@ int main(void){
 
 
 
-
+  	float positionAfterUpdate = 0.0;
+  	float32_t positionAfterUpdate_CMSIS = 0.0f;
 	 for(int i = 0; i < 5; i++) {
-		  kalman_update(&kf, meas[i]);
+		 positionAfterUpdate = kalman_update(&kf, meas[i]);
+		 printf("ASSEMBLY: Updated position x after measurement %d: %f\n", i, positionAfterUpdate);
 	 }
-	 return 0;
+
 
 
 	 	for(int i = 0; i < 5; i++) {
-	 		kalman_update_C_CMSIS(&kf_CMSIS, meas[i]);
+	 		positionAfterUpdate_CMSIS = kalman_update_C_CMSIS(&kf_CMSIS, meas[i]);
+	 		printf("CMSIS: Updated position x after measurement %d: %f\n", i, positionAfterUpdate_CMSIS);
 	 	}
 	 	return 0;
 
